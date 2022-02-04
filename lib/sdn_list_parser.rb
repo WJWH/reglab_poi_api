@@ -17,7 +17,6 @@ module SdnListParser
         first_names = n.at('firstName')&.content
         remarks = n.at('remarks')&.content
         title = n.at('title')&.content
-        aliases = n.at('akaList')
 
         full_name = first_names ? "#{last_name}, #{first_names}" : last_name
 

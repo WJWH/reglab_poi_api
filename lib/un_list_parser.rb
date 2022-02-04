@@ -6,8 +6,8 @@ module UnListParser
         n = Nokogiri::XML(node.outer_xml).at('./INDIVIDUAL')
         
         list_type = n.at('./UN_LIST_TYPE').content
-        uid = n.at('./DATAID').content
-        first_name = n.at('./FIRST_NAME').content
+        uid = n.at('./DATAID').content.to_i
+        first_name = n.at('./FIRST_NAME').content.strip
 
         second_name = n.at('./SECOND_NAME')&.content
         third_name = n.at('./THIRD_NAME')&.content
@@ -28,8 +28,8 @@ module UnListParser
         n = Nokogiri::XML(node.outer_xml).at('./ENTITY')
         
         list_type = n.at('./UN_LIST_TYPE').content
-        uid = n.at('./DATAID').content
-        full_name = n.at('./FIRST_NAME').content
+        uid = n.at('./DATAID').content.to_i
+        full_name = n.at('./FIRST_NAME').content.strip
 
         comments = n.at('./COMMENTS1')&.content
         note = n.at('./NOTE')&.content
