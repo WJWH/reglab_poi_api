@@ -21,6 +21,7 @@ RSpec.describe "Searches", type: :request do
         expect(response.code).to eq("200")
 
         parsed_body = JSON.parse(response.body)
+        expect(parsed_body["exact_match"]).to eq(true)
         expect(parsed_body["results"].size).to eq(1)
         expect(parsed_body["results"].first["full_name"]).to eq("KIM, Jong Un")
       end
@@ -31,6 +32,7 @@ RSpec.describe "Searches", type: :request do
         expect(response.code).to eq("200")
 
         parsed_body = JSON.parse(response.body)
+        expect(parsed_body["exact_match"]).to eq(false)
         expect(parsed_body["results"].size).to eq(1)
         expect(parsed_body["results"].first["full_name"]).to eq("KIM, Jong Un")
       end
@@ -41,6 +43,7 @@ RSpec.describe "Searches", type: :request do
         expect(response.code).to eq("200")
 
         parsed_body = JSON.parse(response.body)
+        expect(parsed_body["exact_match"]).to eq(false)
         expect(parsed_body["results"].size).to eq(1)
         expect(parsed_body["results"].first["full_name"]).to eq("KIM, Jong Un")
       end
@@ -49,7 +52,7 @@ RSpec.describe "Searches", type: :request do
         post '/search', :params => { fullname: "RUTTE, Mark" }.to_json, :headers => headers
 
         expect(response.code).to eq("200")
-        expect(JSON.parse(response.body)).to eq({"results" => []})
+        expect(JSON.parse(response.body)).to eq({"exact_match" => false, "results" => []})
       end
     end
   end
