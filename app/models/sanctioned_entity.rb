@@ -1,0 +1,3 @@
+class SanctionedEntity < ApplicationRecord
+  
+end
