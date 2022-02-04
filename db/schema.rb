@@ -17,18 +17,18 @@ ActiveRecord::Schema.define(version: 2022_02_04_114101) do
   enable_extension "plpgsql"
 
   create_table "sanctioned_entities", force: :cascade do |t|
-    t.string "full_name", null: false
-    t.string "last_name"
-    t.integer "sdn_id", null: false
-    t.string "type", null: false
+    t.integer "list_id", null: false
     t.integer "parent_id"
-    t.string "sdn_program"
-    t.string "sdn_type"
+    t.string "full_name", null: false
+    t.string "entity_type", null: false
+    t.string "sanction_program"
+    t.string "authority"
+    t.string "title"
     t.text "remarks"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["full_name"], name: "index_sanctioned_entities_on_full_name", opclass: :gin_trgm_ops, using: :gin
-    t.index ["last_name"], name: "index_sanctioned_entities_on_last_name", opclass: :gin_trgm_ops, using: :gin
+    t.index ["list_id", "authority"], name: "index_sanctioned_entities_on_list_id_and_authority", unique: true
   end
 
 end
