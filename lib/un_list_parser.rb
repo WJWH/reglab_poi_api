@@ -1,5 +1,6 @@
 module UnListParser
   def self.parse_from_XML(xml_string)
+    unsc_model_objects = []
     Nokogiri::XML::Reader(xml_string).each do |node|
       if node.name == 'INDIVIDUAL' && node.node_type == Nokogiri::XML::Reader::TYPE_ELEMENT
         n = Nokogiri::XML(node.outer_xml).at('./INDIVIDUAL')
@@ -28,7 +29,7 @@ module UnListParser
         
         list_type = n.at('./UN_LIST_TYPE').content
         uid = n.at('./DATAID').content
-        first_name = n.at('./FIRST_NAME').content
+        full_name = n.at('./FIRST_NAME').content
 
         comments = n.at('./COMMENTS1')&.content
         note = n.at('./NOTE')&.content
@@ -43,5 +44,6 @@ module UnListParser
         }
       end
     end
+    unsc_model_objects
   end
 end

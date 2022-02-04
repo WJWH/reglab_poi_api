@@ -1,5 +1,6 @@
 module SdnListParser
   def self.parse_from_XML(xml_string)
+    sdn_model_objects = []
     Nokogiri::XML::Reader(xml_string).each do |node|
       if node.name == 'sdnEntry' && node.node_type == Nokogiri::XML::Reader::TYPE_ELEMENT
         n = Nokogiri::XML(node.outer_xml).at('sdnEntry')
@@ -17,9 +18,6 @@ module SdnListParser
         remarks = n.at('remarks')&.content
         title = n.at('title')&.content
         aliases = n.at('akaList')
-        if aliases
-          # todo: add all the aliases too
-        end
 
         full_name = first_names ? "#{last_name}, #{first_names}" : last_name
 
@@ -34,5 +32,6 @@ module SdnListParser
         }
       end
     end
+    sdn_model_objects
   end
 end
