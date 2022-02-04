@@ -1,5 +1,5 @@
 require 'rails_helper'
 
 RSpec.describe SanctionedEntity, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  # no tests needed yet for an empty model
 end
